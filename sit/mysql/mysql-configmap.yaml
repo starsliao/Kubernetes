@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-conf
+  namespace: sit
+data:
+  mysqld.cnf: |-
+    [mysqld]
+    character-set-server=utf8mb4
+    collation-server=utf8mb4_unicode_ci
+    max-connections=5000
+    max-connect-errors=5000
+    sql-mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+    wait-timeout=1814400
+    interactive-timeout=1814400
+    open-files-limit=65535
+    innodb-buffer-pool-size=2G
+    max-allowed-packet=500M

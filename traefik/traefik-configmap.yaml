@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-conf
+  namespace: traefik
+data:
+  traefik.toml: |
+    defaultEntryPoints = ["http","https"]
+    insecureSkipVerify = true
+    [entryPoints]
+      [entryPoints.http]
+      address = ":80"
+        [entryPoints.http.redirect]
+        entryPoint = "https"
+      [entryPoints.https]
+      address = ":443"
+        [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+          certFile = "/ssl/1.pem"
+          keyFile = "/ssl/1.key"
+    logLevel = "INFO"
+    [traefikLog]
+    [accessLog]
+    [api]
+      [api.statistics]
+        recentErrors = 10
+    [kubernetes]
+      endpoint = "https://192.168.200.215:6443"
+    [metrics]
+      [metrics.prometheus]
+        entryPoint = "traefik"
+        buckets = [0.1,0.3,1.2,5.0]

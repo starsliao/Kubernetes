@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kibana
+  namespace: efk
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: kibana.psit.xxxxxxxx.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kibana-kibana
+          servicePort: http

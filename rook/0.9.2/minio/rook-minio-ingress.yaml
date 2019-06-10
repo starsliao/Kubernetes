@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rook-minio
+  namespace: rook-minio
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: minio.psit.xxxxxxxx.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: minio-service
+          servicePort: 9000

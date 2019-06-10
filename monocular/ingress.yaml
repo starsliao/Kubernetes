@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  labels:
+    app: monocular-monocular
+    chart: monocular-1.3.0
+    heritage: Tiller
+    release: monocular
+  name: monocular-monocular
+  namespace: monocular
+spec:
+  rules:
+  - host: mono.jx.xxxxxxxx.net
+    http:
+      paths:
+      - backend:
+          serviceName: monocular-monocular-ui
+          servicePort: 80
+        path: /?(.*)
+      - backend:
+          serviceName: monocular-monocular-chartsvc
+          servicePort: 8080
+        path: /api/chartsvc/?(.*)

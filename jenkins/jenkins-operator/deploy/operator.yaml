@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: jenkins
+  name: jenkins-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jenkins-operator
+  template:
+    metadata:
+      labels:
+        name: jenkins-operator
+    spec:
+      serviceAccountName: jenkins-operator
+      containers:
+        - name: jenkins-operator
+          # replace this with the built or official image
+          image: virtuslab/jenkins-operator:latest
+          ports:
+          - containerPort: 60000
+            name: metrics
+          command:
+          - jenkins-operator
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "jenkins-operator"

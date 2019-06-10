@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: sit
+  labels:
+    app: mysql 
+spec:
+#  externalIPs:
+#    - 192.168.200.231
+#    - 192.168.200.212
+#    - 192.168.200.208
+  ports:
+  - port: 3306 
+    targetPort: 3306
+    protocol: TCP
+    name: mysql
+  selector:
+    app: mysql

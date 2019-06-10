@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: phpmyadmin-conf
+  namespace: base
+data:
+  config.user.inc.php: |-
+    <?php
+    /* Override Servers array */
+    $cfg['Servers'] = [
+        1 => [                      
+            'auth_type' => 'cookie',
+            'host' => '192.168.200.150',
+            'port' => 3306,
+            'verbose' => '请选择或在上方输入IP',
+        ], 
+        2 => [
+            'auth_type' => 'cookie',
+            'host' => 'mysql.dev',
+            'port' => 3306,
+        ],
+        3 => [
+            'auth_type' => 'cookie',
+            'host' => 'mysql.sit',
+            'port' => 3306,
+        ],
+        4 => [
+            'auth_type' => 'cookie',
+            'host' => 'mysql.pdev',
+            'port' => 3306,
+        ],
+    ];

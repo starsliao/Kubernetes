@@ -1,0 +1,86 @@
+? Pick workload build pack:  Kubernetes Workloads: Automated CI+CD with GitOps Promotion
+Setting the team build pack to kubernetes-workloads repo: https://github.com/jenkins-x-buildpacks/jenkins-x-kubernetes.git ref: master
+Installing jx into namespace jx
+Installing jenkins-x-platform version: 0.0.3321
+Adding values file /root/.jx/cloud-environments/env-kubernetes/myvalues.yaml
+Adding values file /root/.jx/adminSecrets.yaml
+Adding values file /root/.jx/extraValues.yaml
+Adding values file /root/.jx/cloud-environments/env-kubernetes/secrets.yaml
+Upgrading Chart 'upgrade --namespace jx --install --timeout 6000 --version 0.0.3321 --values /root/.jx/cloud-environments/env-kubernetes/myvalues.yaml --values /root/.jx/adminSecrets.yaml --values /root/.jx/extraValues.yaml --values /root/.jx/cloud-environments/env-kubernetes/secrets.yaml jenkins-x jenkins-x/jenkins-x-platform'
+waiting for install to be ready, if this is the first time then it will take a while to download images
+Jenkins X deployments ready in namespace jx
+
+
+        ********************************************************
+
+             NOTE: Your admin password is: Ooz59RcM^ok5zm2rjs%S
+
+        ********************************************************
+
+
+Configure Jenkins API Token
+Generating the API token...
+Logged in admin to Jenkins server at http://jenkins.jx.xxxxxxxx.net via legacy security realm
+Enable CSRF protection at: http://jenkins.jx.xxxxxxxx.net/configureSecurity/
+Created user admin API Token for Jenkins server jenkins.jx.xxxxxxxx.net at http://jenkins.jx.xxxxxxxx.net
+Updating Jenkins with new external URL details http://jenkins.jx.xxxxxxxx.net
+Creating default staging and production environments
+? Select the organization where you want to create the environment repository:  [Use arrows to move, type to filter]
+> starsliao
+? Select the organization where you want to create the environment repository: starsliao
+Using Git provider GitHub at https://github.com
+
+
+About to create repository environment-thumbpink-staging on server https://github.com with user starsliao
+
+
+Creating repository starsliao/environment-thumbpink-staging
+Creating Git repository starsliao/environment-thumbpink-staging
+Pushed Git repository to https://github.com/starsliao/environment-thumbpink-staging
+
+Creating staging Environment in namespace jx
+Created environment staging
+Namespace jx-staging created 
+ Created Jenkins Project: http://jenkins.jx.xxxxxxxx.net/job/starsliao/job/environment-thumbpink-staging/
+
+Note that your first pipeline may take a few minutes to start while the necessary images get downloaded!
+
+Creating GitHub webhook for starsliao/environment-thumbpink-staging for url http://jenkins.jx.xxxxxxxx.net/github-webhook/
+Using Git provider GitHub at https://github.com
+
+
+About to create repository environment-thumbpink-production on server https://github.com with user starsliao
+
+
+Creating repository starsliao/environment-thumbpink-production
+Creating Git repository starsliao/environment-thumbpink-production
+Pushed Git repository to https://github.com/starsliao/environment-thumbpink-production
+
+Creating production Environment in namespace jx
+Created environment production
+Namespace jx-production created 
+ Created Jenkins Project: http://jenkins.jx.xxxxxxxx.net/job/starsliao/job/environment-thumbpink-production/
+
+Note that your first pipeline may take a few minutes to start while the necessary images get downloaded!
+
+Creating GitHub webhook for starsliao/environment-thumbpink-production for url http://jenkins.jx.xxxxxxxx.net/github-webhook/
+
+Jenkins X installation completed successfully
+
+
+        ********************************************************
+
+             NOTE: Your admin password is: Ooz59RcM^ok5zm2rjs%S
+
+        ********************************************************
+
+
+
+Your Kubernetes context is now set to the namespace: jx 
+To switch back to your original namespace use: jx namespace jx
+Or to use this context/namespace in just one terminal use: jx shell
+For help on switching contexts see: https://jenkins-x.io/developing/kube-context/
+
+To import existing projects into Jenkins:       jx import
+To create a new Spring Boot microservice:       jx create spring -d web -d actuator
+To create a new microservice from a quickstart: jx create quickstart

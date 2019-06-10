@@ -1,0 +1,42 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  namespace: base
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        livenessProbe:
+          tcpSocket:
+            port: 80
+        ports:
+        - name: phpmyadmin
+          containerPort: 80
+        env:
+        - name: PMA_ARBITRARY
+          value: "1"
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            memory:   100Mi
+            cpu:      0.1
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/phpmyadmin/config.user.inc.php
+          subPath: config.user.inc.php 
+      volumes:
+      - name: config-volume
+        configMap:
+          name: phpmyadmin-conf

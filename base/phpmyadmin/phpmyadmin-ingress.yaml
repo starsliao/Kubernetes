@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: phpmyadmin
+  namespace: base
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: mysql.psit.xxxxxxxx.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: phpmyadmin
+          servicePort: phpmyadmin

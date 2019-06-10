@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rook-ceph-web
+  namespace: rook-ceph
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: rook.psit.xxxxxxxx.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: rook-ceph-mgr-dashboard-external-https
+          servicePort: dashboard

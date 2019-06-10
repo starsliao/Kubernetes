@@ -1,0 +1,61 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: sit
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+        ports:
+        - name: mysql
+          containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-data
+              key: rootpasswd
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-data
+              key: db
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-data
+              key: user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-data
+              key: userpasswd
+        resources:
+          limits:
+            cpu: 300m
+            memory: 1Gi
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql/
+        - name: config-volume
+          mountPath: /etc/mysql/mysql.conf.d/
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+      - name: config-volume
+        configMap:
+          name: mysql-conf

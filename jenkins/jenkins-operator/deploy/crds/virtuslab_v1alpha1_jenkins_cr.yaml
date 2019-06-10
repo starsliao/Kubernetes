@@ -1,0 +1,14 @@
+apiVersion: virtuslab.com/v1alpha1
+kind: Jenkins
+metadata:
+  namespace: jenkins
+  name: example
+spec:
+  master:
+   image: jenkins/jenkins:lts
+  seedJobs:
+  - id: jenkins-operator
+    targets: "cicd/jobs/*.jenkins"
+    description: "Jenkins Operator repository"
+    repositoryBranch: master
+    repositoryUrl: https://github.com/VirtusLab/jenkins-operator.git

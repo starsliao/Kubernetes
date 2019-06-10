@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  namespace: base
+  labels:
+    app: phpmyadmin
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: phpmyadmin
+  selector:
+    app: phpmyadmin
