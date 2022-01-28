@@ -9,6 +9,6 @@
 ### Package Manager: Helm
 ### ingress: traefik
 ### monitoring: prometheus
-### logging: EFK
-### CI/CD: jenkins X
+### logging: EFK Loki
+### CI/CD: jenkinsX argoCD
 ### deploy: ansible AWX
